@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import br.edu.ifro.vilhena.agendadecontatos.dao.ContatoDAO;
 import br.edu.ifro.vilhena.agendadecontatos.model.Contato;
 
 public class FormularioActivity extends AppCompatActivity {
@@ -40,6 +41,12 @@ public class FormularioActivity extends AppCompatActivity {
                 contato.setEmail(formularioEmail.getText().toString());
                 contato.setEndereco(formularioEndereco.getText().toString());
                 contato.setTelefone(formularioTelefone.getText().toString());
+
+                //Inserir no banco de dados
+
+                ContatoDAO contatoDAO = new ContatoDAO(FormularioActivity.this);
+                contatoDAO.inserir(contato);
+
 
                 //Mostrar a mensagem
                 Toast.makeText(FormularioActivity.this, "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();

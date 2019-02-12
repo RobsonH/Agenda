@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.List;
+
+import br.edu.ifro.vilhena.agendadecontatos.dao.ContatoDAO;
+import br.edu.ifro.vilhena.agendadecontatos.model.Contato;
+
 public class ListarContatosActivity extends AppCompatActivity {
 
     private ListView listarContatosListView;
@@ -23,9 +28,12 @@ public class ListarContatosActivity extends AppCompatActivity {
         listarContatosBtn = findViewById(R.id.listar_contato_btn);
 
         //Criando um adapter para enviar os dados para o ListView
-        String [] contatos = {"Robson", "João", "Maria", "José"};
+        //String [] contatos = {"Robson", "João", "Maria", "José"};
+        ContatoDAO contatoDAO = new ContatoDAO(this);
+        List<Contato> contatos = contatoDAO.listar();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contatos);
+
+        ArrayAdapter<Contato> adapter = new ArrayAdapter<Contato>(this, android.R.layout.simple_list_item_1, contatos);
 
         //ListView utiliza o adapter
         listarContatosListView.setAdapter(adapter);
@@ -38,11 +46,7 @@ public class ListarContatosActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
     }
+
+
 }
