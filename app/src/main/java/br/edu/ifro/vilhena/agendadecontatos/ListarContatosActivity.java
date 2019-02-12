@@ -27,16 +27,7 @@ public class ListarContatosActivity extends AppCompatActivity {
         listarContatosListView = findViewById(R.id.listar_contatos_listview);
         listarContatosBtn = findViewById(R.id.listar_contato_btn);
 
-        //Criando um adapter para enviar os dados para o ListView
-        //String [] contatos = {"Robson", "João", "Maria", "José"};
-        ContatoDAO contatoDAO = new ContatoDAO(this);
-        List<Contato> contatos = contatoDAO.listar();
 
-
-        ArrayAdapter<Contato> adapter = new ArrayAdapter<Contato>(this, android.R.layout.simple_list_item_1, contatos);
-
-        //ListView utiliza o adapter
-        listarContatosListView.setAdapter(adapter);
 
         // Ao clicar no floatActionButton
         listarContatosBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +39,17 @@ public class ListarContatosActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();//Criando um adapter para enviar os dados para o ListView
+        //String [] contatos = {"Robson", "João", "Maria", "José"};
+        ContatoDAO contatoDAO = new ContatoDAO(this);
+        List<Contato> contatos = contatoDAO.listar();
 
+
+        ArrayAdapter<Contato> adapter = new ArrayAdapter<Contato>(this, android.R.layout.simple_list_item_1, contatos);
+
+        //ListView utiliza o adapter
+        listarContatosListView.setAdapter(adapter);
+    }
 }
